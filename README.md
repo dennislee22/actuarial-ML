@@ -31,18 +31,17 @@ The [synthetic data creation](synthetic_data.py) script generates a large, reali
 
 ```
 $ python synthetic_data.py
-Starting underwriting data generation for 10000000 records...
-  ...Generated and saved records 1 to 1000000
-  ...Generated and saved records 1000001 to 2000000
-  ...Generated and saved records 2000001 to 3000000
-  ...Generated and saved records 3000001 to 4000000
-  ...Generated and saved records 4000001 to 5000000
-  ...Generated and saved records 5000001 to 6000000
-  ...Generated and saved records 6000001 to 7000000
-  ...Generated and saved records 7000001 to 8000000
-  ...Generated and saved records 8000001 to 9000000
-  ...Generated and saved records 9000001 to 10000000
-
+Starting underwriting data generation for 50000000 records...
+  ...Generated and saved records 1 to 5000000
+  ...Generated and saved records 5000001 to 10000000
+  ...Generated and saved records 10000001 to 15000000
+  ...Generated and saved records 15000001 to 20000000
+  ...Generated and saved records 20000001 to 25000000
+  ...Generated and saved records 25000001 to 30000000
+  ...Generated and saved records 30000001 to 35000000
+  ...Generated and saved records 35000001 to 40000000
+  ...Generated and saved records 40000001 to 45000000
+  ...Generated and saved records 45000001 to 50000000
 Synthetic underwriting data generation complete. Data saved to 'underwriting_data.csv'.
 ```
 
