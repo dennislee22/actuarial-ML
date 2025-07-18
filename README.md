@@ -47,7 +47,7 @@ Synthetic underwriting data generation complete. Data saved to 'underwriting_dat
 ## Step 2: Train the XGBoost Model in Distributed Fashion
 The [model training script](dask-xgboost-actuarial.ipynb) takes the synthetic data from Step 1 and uses it to train our model. It performs the crucial `One-Hot Encoding` step to convert text to numbers, then feeds the data to the XGBoost algorithm. Models like XGBoost can't work directly with text like "Sedan" or "SUV". They need numbers. `One-Hot Encoding` solves this by creating new columns for each unique category.
 
-For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Sports Car'), the line of code pd.get_dummies(new_applicant_data, columns=['vehicle_type']) will transform the output into numerical value. After learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
+For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Sports Car'), the line of code `dask.dataframe.get_dummies(ddf, columns=['vehicle_type']` will transform the output into numerical value. After learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
 
 ### Handling Large-Scale Dataset with Dask
 
