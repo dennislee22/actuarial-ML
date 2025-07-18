@@ -16,13 +16,8 @@ First, the model needs to learn. We start with a large historical dataset contai
   - Usage Patterns: Annual mileage.
   - Risk History: Number of past claims and traffic violations.
 
-The algorithm of choice for this task is XGBoost. It's incredibly fast, highly accurate, and excels at uncovering complex, non-linear relationships in tabular data—like how the risk of a young driver in a sports car increases exponentially, not linearly.
-
-Before training, we must address a fundamental challenge: models like XGBoost are mathematical and cannot understand text. This is where One-Hot Encoding comes in. We convert a categorical column like vehicle_type into multiple numerical columns (vehicle_type_Sedan, vehicle_type_SUV, etc.), allowing the model to process the information.
-
+The algorithm of choice for this task is XGBoost. It's incredibly fast, highly accurate, and excels at uncovering complex, non-linear relationships in tabular data; like how the risk of a young driver in a sports car increases exponentially, not linearly.
 The model then trains on this processed data, iteratively building hundreds of decision trees to learn the intricate patterns that connect an applicant's profile to their premium.
-
-A Practical Walkthrough: From Code to Quote
 Achieving this automated system involves a clear, four-step process. Here’s how it works in practice:
 
 ## Step 1: Generate Synthetic Data
@@ -52,13 +47,13 @@ Synthetic underwriting data generation complete. Data saved to 'underwriting_dat
 ```
 
 ## Step 2: Train the XGBoost Model in Distributed Fashion
-The second script takes the synthetic data from Step 1 and uses it to train our model. It performs the crucial `One-Hot Encoding` step to convert text to numbers, then feeds the data to the XGBoost algorithm. Models like XGBoost can't work directly with text like "Sedan" or "SUV". They need numbers. `One-Hot Encoding` solves this by creating new columns for each unique category.
+The [model training script](dask-xgboost-actuarial.ipynb) takes the synthetic data from Step 1 and uses it to train our model. It performs the crucial `One-Hot Encoding` step to convert text to numbers, then feeds the data to the XGBoost algorithm. Models like XGBoost can't work directly with text like "Sedan" or "SUV". They need numbers. `One-Hot Encoding` solves this by creating new columns for each unique category.
 
-For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Sports Car'), the line of code pd.get_dummies(new_applicant_data, columns=['vehicle_type']) will transformAfter learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
+For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Sports Car'), the line of code pd.get_dummies(new_applicant_data, columns=['vehicle_type']) will transform the output into numerical value. After learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
 
 ### Handling Large-Scale Dataset with Dask
 
-As datasets grow into the GB/TB, they can no longer fit into the limited RAM. To solve this, I use Dask. Dask is a parallel computing library that allows our script to read and process the data in manageable chunks/partitions. By using `dask-xgboost`, model can be trained on the entire dataset without ever needing to load it all into memory at once, making it possible to work with massive amounts of data on a single machine or a cluster.
+As datasets grow into the tens of GB, they can no longer fit into the limited RAM of the node training the model. To solve this, I use Dask. Dask is a parallel computing library that allows our script to read and process the data in manageable chunks/partitions. By using `dask-xgboost`, model can be trained on the entire dataset without ever needing to load it all into memory at once, making it possible to work with massive amounts of data on a single machine or a cluster.
 
 ## Step 3: Create a New Applicant List
 To simulate a real-world scenario, this [script](new_customer.py) creates a small CSV file (new_applicants.csv) containing 10 new, unseen customer profiles. This represents a list of potential customers who have just applied for an insurance quote online.
