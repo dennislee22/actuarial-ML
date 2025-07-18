@@ -56,7 +56,7 @@ The second script takes the synthetic data from Step 1 and uses it to train our 
 
 For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Sports Car'), the line of code pd.get_dummies(new_applicant_data, columns=['vehicle_type']) will transformAfter learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
 
-### Handling Large-Scale Data with Dask
+### Handling Large-Scale Dataset with Dask
 
 As datasets grow into the GB/TB, they can no longer fit into the limited RAM. To solve this, I use Dask. Dask is a parallel computing library that allows our script to read and process the data in manageable chunks/partitions. By using `dask-xgboost`, model can be trained on the entire dataset without ever needing to load it all into memory at once, making it possible to work with massive amounts of data on a single machine or a cluster.
 
