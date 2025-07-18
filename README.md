@@ -5,7 +5,6 @@
 For decades, insurance underwriting has been a cornerstone of risk management - a meticulous, human-driven process where actuaries and underwriters analyze applicant data to assess risk and determine premiums. While effective, this traditional approach is often slow and relies on generalized models that can struggle to capture the nuances of individual risk.
 Machine Learning (ML) is fundamentally reshaping this landscape. By leveraging sophisticated algorithms, insurers can now automate and expedite the underwriting process, moving from manual, days-long assessments to instant, data-driven quotations. In this post, I'll walk through a practical example of how an ML model, specifically XGBoost, can be trained to create a powerful and precise quoting engine.
 
-
 The goal is to build a system that can take an applicant's profile and instantly generate a fair and accurate annual premium quote. Our workflow is split into two key phases: training and inference.
 
 ## Learning from the Past: Training the Model
@@ -53,6 +52,8 @@ For example, if your vehicle_type column has three options ('Sedan', 'SUV', 'Spo
 ### Handling Large-Scale Dataset with Dask
 
 As datasets grow into the tens of GB, they can no longer fit into the limited RAM of the node training the model. To solve this, I use Dask. Dask is a parallel computing library that allows our script to read and process the data in manageable chunks/partitions. By using `dask-xgboost`, model can be trained on the entire dataset without ever needing to load it all into memory at once, making it possible to work with massive amounts of data on a single machine or a cluster.
+
+![actuarial-dask](https://github.com/user-attachments/assets/c6a0c973-e4da-4442-8728-b6423fa7028a)
 
 ## Step 3: Create a New Applicant List
 To simulate a real-world scenario, this [script](new_customer.py) creates a small CSV file (new_applicants.csv) containing 10 new, unseen customer profiles. This represents a list of potential customers who have just applied for an insurance quote online.
