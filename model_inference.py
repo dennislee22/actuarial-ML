@@ -20,18 +20,20 @@ def get_premium_quote(new_applicant_data, model_bundle_file='underwriting_bundle
     print(f"Model bundle '{model_bundle_file}' loaded successfully.")
     
     # --- Unpack the model and columns from the bundle ---
+    # The model is now a standard XGBoost Booster object
     model = model_bundle['model']
     model_columns = model_bundle['columns']
     
     # --- Preprocess the new data ---
-    # The model was not trained on customer_id or customer_name, so we can pass the
-    # full dataframe. The reindex step will automatically select only the columns
-    # the model needs and was trained on.
     new_df_processed = pd.get_dummies(new_applicant_data, columns=['vehicle_type'])
     new_df_aligned = new_df_processed.reindex(columns=model_columns, fill_value=0)
     
+    # --- Convert data to DMatrix for Booster model ---
+    # The core Booster model expects data in XGBoost's optimized DMatrix format.
+    dmatrix_new_data = xgb.DMatrix(new_df_aligned)
+    
     print("\nGenerating quotes for new applicants...")
-    predictions = model.predict(new_df_aligned)
+    predictions = model.predict(dmatrix_new_data)
     
     return predictions
 
