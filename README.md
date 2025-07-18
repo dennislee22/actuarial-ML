@@ -26,7 +26,7 @@ The [synthetic data creation](synthetic_data.py) script generates a large, reali
   - vehicle_type & vehicle_value: High-performance or high-value cars are more expensive to insure.
   - annual_mileage: The more you drive, the higher the exposure to potential accidents.
   - past_claims_count & traffic_violations_count: Past behavior is a strong predictor of future risk.
-  - annual_premium_quote: The variable—the final premium the model will learn to predict.
+  - annual_premium_quote: The final premium the model will learn to predict.
 
 ```
 $ python synthetic_data.py
