@@ -78,7 +78,7 @@ def generate_applicant_batch(batch_size=1000):
         
     return pd.DataFrame(data)
 
-def create_underwriting_dataset(total_records=100_000_000, batch_size=10_000_000, output_file='underwriting_data.csv'):
+def create_underwriting_dataset(total_records=50_000_000, batch_size=5_000_000, output_file='underwriting_data.csv'):
     """
     Creates the full underwriting dataset by generating and saving batches.
     """
