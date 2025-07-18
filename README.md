@@ -1,4 +1,6 @@
-# Actuarial Underwriting with ML
+# Actuarial Underwriting with XGBoost-Dask
+
+<img width="395" height="408" alt="image" src="https://github.com/user-attachments/assets/102080c6-3fc2-4d6a-8fdc-c3425c295fe4" />
 
 For decades, insurance underwriting has been a cornerstone of risk management - a meticulous, human-driven process where actuaries and underwriters analyze applicant data to assess risk and determine premiums. While effective, this traditional approach is often slow and relies on generalized models that can struggle to capture the nuances of individual risk.
 Machine Learning (ML) is fundamentally reshaping this landscape. By leveraging sophisticated algorithms, insurers can now automate and expedite the underwriting process, moving from manual, days-long assessments to instant, data-driven quotations. In this post, I'll walk through a practical example of how an ML model, specifically XGBoost, can be trained to create a powerful and precise quoting engine.
