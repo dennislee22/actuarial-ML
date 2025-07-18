@@ -24,7 +24,7 @@ A Practical Walkthrough: From Code to Quote
 Achieving this automated system involves a clear, four-step process. Here’s how it works in practice:
 
 ## Step 1: Generate Synthetic Data
-Before we can train a model, we need data. The first script generates a large, realistic training dataset (underwriting_data.csv). This file contains thousands of fictional applicant profiles, where each column represents a key risk factor:
+The [synthetic data creation](synthetic_data.py) script generates a large, realistic training dataset (underwriting_data.csv). This file contains thousands of fictional applicant profiles, where each column represents a key risk factor:
 
   - age & driving_experience: Younger, less experienced drivers typically represent higher risk.
   - vehicle_type & vehicle_value: High-performance or high-value cars are more expensive to insure.
@@ -32,14 +32,18 @@ Before we can train a model, we need data. The first script generates a large, r
   - past_claims_count & traffic_violations_count: Past behavior is a strong predictor of future risk.
   - annual_premium_quote: The variable—the final premium the model will learn to predict.
 
+```
+
+```
+
 ## Step 2: Train the XGBoost Model
 The second script takes the synthetic data from Step 1 and uses it to train our model. It performs the crucial `One-Hot Encoding` step to convert text to numbers, then feeds the data to the XGBoost algorithm. After learning the patterns, the script saves the complete, trained model into a single, convenient file (underwriting_bundle.joblib) for later use.
 
 ## Step 3: Create a New Applicant List
-To simulate a real-world scenario, the third script creates a small CSV file (new_applicants.csv) containing 10 new, unseen customer profiles. This represents a list of potential customers who have just applied for an insurance quote online.
+To simulate a real-world scenario, this [script](new_customer.py) creates a small CSV file (new_applicants.csv) containing 10 new, unseen customer profiles. This represents a list of potential customers who have just applied for an insurance quote online.
 
 ## Step 4: Infer Premiums with the Trained Model
-This is where the magic happens. The final script acts as the quoting engine. It loads the saved model from Step 2 and the new applicant list from Step 3. For each applicant, it processes their data to match the format the model expects and instantly generates a predicted annual premium. This step demonstrates how the system can provide instant quotes at scale.
+The [inference script](model_inference.py) acts as the quoting engine. It loads the saved model from Step 2 and the new applicant list from Step 3. For each applicant, it processes their data to match the format the model expects and instantly generates a predicted annual premium. This step demonstrates how the system can provide instant quotes at scale.
 
 ## The Model's Report Card: Interpreting the Results
 After training, we evaluate the model on a "test set"—data it has never seen before. This tells us how well it will perform in the real world. Our model produced the following results:
